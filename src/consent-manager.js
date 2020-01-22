@@ -14,6 +14,10 @@ export default class ConsentManager {
         this.applyConsents()
     }
 
+    get cookieDomain(){
+        return this.config.cookieDomain
+    }
+
     get cookieName(){
         return this.config.cookieName || 'klaro'
     }
@@ -124,7 +128,7 @@ export default class ConsentManager {
 
     saveConsents(){
         const v = JSON.stringify(this.consents)
-        setCookie(this.cookieName, v, this.config.cookieExpiresAfterDays || 120)
+        setCookie(this.cookieName, v, this.config.cookieExpiresAfterDays || 120, this.cookieDomain)
         this.confirmed = true
         this.changed = false
     }
